@@ -40,6 +40,7 @@ class _MovieListState extends State<MovieListTop> {
         backgroundColor: Colors.black,
       ),
 
+      backgroundColor: Colors.black,
       drawer: Drawer(
         child: Column(
           children: <Widget>[
@@ -96,7 +97,7 @@ class _MovieListState extends State<MovieListTop> {
               leading: Image.network(
                   'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' +
                       movies[position].posterPath),
-              title: Text(movies[position].title),
+              title: Text(movies[position].title,style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(
                 'Rating = ' + movies[position].voteAverage.toString(),
               ),
