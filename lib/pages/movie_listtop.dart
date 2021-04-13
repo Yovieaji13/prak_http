@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:prak_http/pages/movie_detail.dart';
-import 'package:prak_http/pages/movie_listtop.dart';
+import 'package:prak_http/pages/movie_detailtop.dart';
+import 'package:prak_http/pages/movie_list.dart';
 import 'package:prak_http/pages/movie_listup.dart';
 import 'package:prak_http/pages/movie_listnow.dart';
 import 'package:prak_http/service/http_service.dart';
 
-class MovieList extends StatefulWidget {
+class MovieListTop extends StatefulWidget {
   @override
   _MovieListState createState() => _MovieListState();
 }
 
-class _MovieListState extends State<MovieList> {
+class _MovieListState extends State<MovieListTop> {
   int moviesCount;
   List movies;
   HttpService service;
@@ -18,7 +18,7 @@ class _MovieListState extends State<MovieList> {
 
   Future initialize() async {
     movies = [];
-    movies = await service.getPopularMovies();
+    movies = await service.getTopRatedMovie();
     setState(() {
       moviesCount = movies.length;
       movies = movies;
@@ -36,7 +36,7 @@ class _MovieListState extends State<MovieList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Popular Movies"),
+        title: Text("Top Rated Movies"),
         backgroundColor: Colors.black,
       ),
 
@@ -48,14 +48,12 @@ class _MovieListState extends State<MovieList> {
               onTap: () {
                 Navigator.pop(context);
               },
-            ),            
+            ),
             ListTile(
               leading: Icon(Icons.movie),
               title: Text("Movie Top Rate"),
               onTap: () {
-                MaterialPageRoute route = MaterialPageRoute(
-                    builder: (_) => MovieListTop());
-                Navigator.push(context, route);
+                Navigator.pop(context);
               },
             ),
              ListTile(
@@ -73,6 +71,14 @@ class _MovieListState extends State<MovieList> {
               onTap: () {
                 MaterialPageRoute route = MaterialPageRoute(
                     builder: (_) => MovieListNow());
+                Navigator.push(context, route);
+              },
+            ),
+            ListTile(
+              title: Text("BACK HOME"),
+              onTap: () {
+                MaterialPageRoute route = MaterialPageRoute(
+                    builder: (_) => MovieList());
                 Navigator.push(context, route);
               },
             ),
@@ -96,7 +102,7 @@ class _MovieListState extends State<MovieList> {
               ),
               onTap: () {
                 MaterialPageRoute route = MaterialPageRoute(
-                    builder: (_) => MovieDetail(movies[position]));
+                    builder: (_) => MovieDetailTop(movies[position]));
                 Navigator.push(context, route);
               },
             ),
